@@ -16,6 +16,8 @@ const io = new Server(process.env.PORT || 8000, {
 			'https://number-game-react.herokuapp.com',
 			'http://number-game-react.herokuapp.com',
 		],
+		allowedHeaders: ['Access-Control-Allow-Origin'],
+		credentials: true,
 	},
 });
 let chance = 0;
