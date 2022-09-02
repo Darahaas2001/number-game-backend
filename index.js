@@ -11,7 +11,10 @@ const {
 } = require('./User');
 const io = new Server(process.env.PORT || 8000, {
 	cors: {
-		origin: '*',
+		origin: [
+			'http://localhost:3000/',
+			'https://number-game-react.herokuapp.com/',
+		],
 		allowedHeaders: [
 			'Content-Type: application/json',
 			'Access-Control-Allow-Origin:*',
