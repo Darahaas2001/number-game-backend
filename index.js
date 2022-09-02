@@ -85,7 +85,8 @@ io.on('connection', (socket) => {
 				/** Remove the User chance
 				 *
 				 */
-				let chanceResp = activeUserInRoom(chance + 2, data.room);
+				chance += 1;
+				let chanceResp = activeUserInRoom(chance, data.room);
 				if (chanceResp.status === 'SUCCESS') {
 					io.to(data.room).emit(
 						'updateActivePlayer',
@@ -93,6 +94,13 @@ io.on('connection', (socket) => {
 					);
 				} else if (chanceResp === 'FAIL') {
 					chance = 0;
+					let chanceResp = activeUserInRoom(chance, data.room);
+					let userData = getUsersInGame(data.room);
+					io.to(data.room).emit(
+						'updateActivePlayer',
+						JSON.stringify(chanceResp.payload)
+					);
+					io.to(userData[chance]['id']).emit('enableMouse', true);
 				}
 				let userRoomData = eliminateUserInRoom(data.number, data.room);
 
