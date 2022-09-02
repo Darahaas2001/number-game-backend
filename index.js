@@ -27,9 +27,12 @@ io.on('connection', (socket) => {
 		try {
 			console.log(socket.id + ' disconnected');
 			let data = removeUser(socket.id);
-			let userRoomData = getUsersInGame(data.room);
 
-			io.to(data.room).emit('updateUserData', JSON.stringify(userRoomData));
+			if (data !== 'USER_NOT_FOUND') {
+				let userRoomData = getUsersInGame(data.room);
+
+				io.to(data.room).emit('updateUserData', JSON.stringify(userRoomData));
+			}
 		} catch (err) {
 			console.log(err);
 		}

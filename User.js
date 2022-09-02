@@ -28,12 +28,13 @@ const addUser = ({ id, name, room, color, userNumber }) => {
 
 const removeUser = (id) => {
 	const index = users.findIndex((user) => {
-		user.id === id;
+		return user.id === id;
 	});
 
 	if (index !== -1) {
 		return users.splice(index, 1)[0];
 	}
+	return 'USER_NOT_FOUND';
 };
 
 const getUser = (id) => users.find((user) => user.id === id);
@@ -73,8 +74,6 @@ const selectNumber = (id, room, number, color) => {
 	let userIndex = users.filter((user) => user.userNumber === number);
 
 	if (userIndex.length > 0) {
-		console.log(userIndex);
-
 		return { payload: 'USER_ELIMINATION', userIndex };
 	}
 
