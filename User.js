@@ -32,9 +32,7 @@ const removeUser = (id) => {
 	});
 
 	if (index !== -1) {
-		let returnVal = users[index];
-		users.splice(index, 1)[0];
-		return returnVal;
+		return users.splice(index, 1)[0];
 	}
 };
 
