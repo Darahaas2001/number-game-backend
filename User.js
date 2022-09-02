@@ -66,9 +66,7 @@ const activeUserInRoom = (chance, room) => {
 	} else {
 		chance = 0;
 
-		activeUserInRoom(chance, room);
-		let userData = getUsersInRoom(room);
-		return { status: 'SUCCESS', payload: chance, users: userData };
+		return activeUserInRoom(chance, room);
 	}
 };
 const deactiveUserInRoom = (id, room) => {
