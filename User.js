@@ -44,10 +44,11 @@ const getUsersInGame = (room) =>
 const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
 const eliminateUserInRoom = (number, room) => {
-	for (const data of users) {
-		if (data.userNumber === number && data.room === room) {
-			data.eliminated = true;
-		}
+	let index = users.findIndex(
+		(user) => user.userNumber === number && user.room === room
+	);
+	if (index !== -1) {
+		users[index]['eliminated'] = true;
 	}
 	let filteredData = users.filter((user) => user.room === room);
 

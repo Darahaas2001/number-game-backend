@@ -97,10 +97,10 @@ io.on('connection', (socket) => {
 						JSON.stringify(chanceResp.payload)
 					);
 					io.to(data.room).emit('disableMouse', true);
-					io.to(data.room).emit(
-						'updateUserData',
-						JSON.stringify(chanceResp.users)
-					);
+					// io.to(data.room).emit(
+					// 	'updateUserData',
+					// 	JSON.stringify(chanceResp.users)
+					// );
 					io.to(userData[chance]['id']).emit('enableMouse', true);
 				}
 				// } else if (chanceResp.status === 'FAIL') {
