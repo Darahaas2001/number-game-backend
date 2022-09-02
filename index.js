@@ -12,7 +12,6 @@ const {
 const io = new Server(process.env.PORT || 8000, {
 	cors: {
 		origin: '*',
-		allowedHeaders: ['Content-Type: application/json'],
 	},
 });
 let chance = 0;
