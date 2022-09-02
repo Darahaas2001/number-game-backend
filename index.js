@@ -77,11 +77,13 @@ io.on('connection', (socket) => {
 				 * Code for striking the user name
 				 * Should Mark the block Black
 				 */
-				resp.userIndex.forEach((user) => {
-					io.to(user.id).emit('disableMouse', true);
-				});
 				let userRoomData = eliminateUserInRoom(data.number, data.room);
 				io.to(data.room).emit('updateUserData', JSON.stringify(userRoomData));
+
+				for (const user of resp.userIndex) {
+					io.to(user.id).emit('disableMouse', true);
+				}
+
 				io.to(data.room).emit('mark-black', data.number);
 
 				/** Remove the User chance
