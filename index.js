@@ -18,6 +18,9 @@ io.on('connection', (socket) => {
 	socket.on('disconnect', (reason) => {
 		console.log(socket.id + ' disconnected');
 		removeUser(socket.id);
+		let userRoomData = getUsersInGame(data.room);
+
+		io.to(data.room).emit('updateUserData', JSON.stringify(userRoomData));
 	});
 	socket.on('room-add', (data1) => {
 		let data = JSON.parse(data1);
