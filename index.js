@@ -81,6 +81,7 @@ io.on('connection', (socket) => {
 					io.to(user.id).emit('disableMouse', true);
 				});
 				let userRoomData = eliminateUserInRoom(data.number, data.room);
+				io.to(data.room).emit('updateUserData', JSON.stringify(userRoomData));
 				io.to(data.room).emit('mark-black', data.number);
 
 				/** Remove the User chance
@@ -96,8 +97,11 @@ io.on('connection', (socket) => {
 						JSON.stringify(chanceResp.payload)
 					);
 					io.to(data.room).emit('disableMouse', true);
+					io.to(data.room).emit(
+						'updateUserData',
+						JSON.stringify(chanceResp.users)
+					);
 					io.to(userData[chance]['id']).emit('enableMouse', true);
-					io.to(data.room).emit('updateUserData', JSON.stringify(userRoomData));
 				}
 				// } else if (chanceResp.status === 'FAIL') {
 				// 	chance = 0;
