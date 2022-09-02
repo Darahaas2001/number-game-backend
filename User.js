@@ -44,20 +44,30 @@ const getUsersInGame = (room) =>
 const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
 const eliminateUserInRoom = (number, room) => {
-	let filteredData = users.filter((user) => user.room === room);
-
-	for (const data of filteredData) {
-		if (data.userNumber === number) {
+	for (const data of users) {
+		if (data.userNumber === number && data.room === room) {
 			data.eliminated = true;
 		}
 	}
+	let filteredData = users.filter((user) => user.room === room);
+
 	return filteredData;
 };
 const activeUserInRoom = (chance, room) => {
-	if (chance <= getUsersInGame(room).length - 1) {
-		return { status: 'SUCCESS', payload: chance };
+	if (chance <= getUsersInRoom(room).length - 1) {
+		let userData = getUsersInRoom(room);
+		if (userData[chance].eliminated === true) {
+			chance += 1;
+			return activeUserInRoom(chance, room);
+		} else {
+			return { status: 'SUCCESS', payload: chance, users: userData };
+		}
 	} else {
-		return 'FAIL';
+		chance = 0;
+
+		activeUserInRoom(chance, room);
+		let userData = getUsersInRoom(room);
+		return { status: 'SUCCESS', payload: chance, users: userData };
 	}
 };
 const deactiveUserInRoom = (id, room) => {
