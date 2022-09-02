@@ -10,7 +10,13 @@ const {
 	removeUser,
 } = require('./User');
 const io = new Server(process.env.PORT || 8000, {
-	cors: { origin: '*', allowedHeaders: ['Content-Type: application/json'] },
+	cors: {
+		origin: '*',
+		allowedHeaders: [
+			'Content-Type: application/json',
+			'Access-Control-Allow-Origin:*',
+		],
+	},
 });
 let chance = 0;
 
