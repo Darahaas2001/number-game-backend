@@ -15,10 +15,7 @@ const io = new Server(process.env.PORT || 8000, {
 			'http://localhost:3000/',
 			'https://number-game-react.herokuapp.com/',
 		],
-		allowedHeaders: [
-			'Content-Type: application/json',
-			'Access-Control-Allow-Origin:*',
-		],
+		allowedHeaders: ['Content-Type: application/json'],
 	},
 });
 let chance = 0;
